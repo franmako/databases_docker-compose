@@ -1,0 +1,30 @@
+version: '3.1'
+
+services:
+    postgres:
+        image: postgres
+        env_file: 
+            - .env
+        volumes:
+            - postgres/data:/var/lib/postgresql/data
+        expose:
+            - 5432
+        environment:
+            DB_PASSWORD: ${POSTGRES_ROOT_PASSWORD}
+        restart: always
+  
+    mysql:
+        image: mysql
+        volumes:
+            - mysql/data:/var/lib/mysql
+        expose:
+            - 3306
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+        restart: always
+
+    adminer:
+        image: adminer
+        ports:
+          - 8080:8080
+        restart: always 
