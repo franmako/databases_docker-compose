@@ -2,7 +2,7 @@ version: '3.1'
 
 services:
     postgres:
-        image: postgres
+        image: postgres:latest
         env_file: 
             - .env
         volumes:
@@ -14,7 +14,7 @@ services:
         restart: always
   
     mysql:
-        image: mysql
+        image: mysql:latest
         volumes:
             - mysql/data:/var/lib/mysql
         ports:
@@ -24,7 +24,7 @@ services:
         restart: always
 
     adminer:
-        image: adminer
+        image: adminer:latest
         ports:
           - 8080:8080
         restart: always 
