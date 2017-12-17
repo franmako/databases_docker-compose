@@ -2,6 +2,7 @@ version: '3.1'
 
 services:
     postgres:
+        container_name: postgres
         image: postgres:latest
         env_file: 
             - .env
@@ -14,18 +15,20 @@ services:
         restart: always
   
     mysql:
+        container_name: mysql
         image: mysql:latest
         env_file: 
             - .env
         volumes:
             - ./mysql/data:/var/lib/mysql
         ports:
-            - 3307:3306
+            - 3306:3306
         environment:
             MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
         restart: always
 
     adminer:
+        container_name: adminer
         image: adminer:latest
         ports:
           - 8080:8080
