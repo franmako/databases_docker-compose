@@ -37,10 +37,32 @@ services:
     adminer:
         container_name: adminer
         image: adminer
-        ports:
-          - "8081:8080"
+        expose:
+          - "8080"
         restart: always 
+
+    web:
+        build: .
+        container_name: adminer_web
+        volumes:
+            - nginx_logs:/var/log/nginx
+        networks:
+            - reverse-proxy
+        environment:
+            - VIRTUAL_HOST=database.franmako.me 
+            - LETSENCRYPT_HOST=database.franmako.me
+            - LETSENCRYPT_EMAIL=francisomakokha@outlook.com
+        expose:
+            - "80"     
+            - "443"
+        restart: always
+
 
 volumes:
     postgres-data:
     mysql-data:
+
+networks:
+    reverse-proxy:
+        external:
+            name: franmakoreverseproxy_reverse-proxy
