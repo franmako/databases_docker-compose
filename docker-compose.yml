@@ -21,7 +21,7 @@ services:
             - .env
         volumes:
             - mysql-data:/var/lib/mysql
-        ports:
+        expose:
             - "3306"
         environment:
             MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
@@ -30,14 +30,14 @@ services:
     redis:
         container_name: redis
         image: redis
-        ports:
+        expose:
             - "6379"
         restart: always
 
     adminer:
         container_name: adminer
         image: adminer
-        expose:
+        ports:
           - "8080:8080"
         restart: always 
 
