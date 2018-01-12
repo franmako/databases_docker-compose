@@ -61,6 +61,7 @@ services:
 volumes:
     postgres-data:
     mysql-data:
+    nginx_logs:
 
 networks:
     reverse-proxy:
