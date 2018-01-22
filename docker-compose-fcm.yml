@@ -28,4 +28,4 @@ volumes:
 networks:
     reverse-proxy:
         external:
-            name: franmakoreverseproxy_reverse-proxy
+            name: reverseproxy_reverse-proxy
