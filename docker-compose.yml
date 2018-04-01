@@ -47,7 +47,7 @@ services:
             - traefik.backend=adminer
             - traefik.frontend.rule=Host:db-admin.reddevs.io
             - traefik.docker.network=proxy
-            - traefik.port=80
+            - traefik.port=8080
         networks:
             - default
             - reverse-proxy
