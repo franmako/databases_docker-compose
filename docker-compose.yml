@@ -8,6 +8,8 @@ services:
             - .env
         volumes:
             - postgres-data:/var/lib/postgresql/data
+        labels:
+            - traefik.enable=false
         expose:
             - "5432"
         environment:
@@ -21,6 +23,8 @@ services:
             - .env
         volumes:
             - mysql-data:/var/lib/mysql
+        labels:
+            - traefik.enable=false
         expose:
             - "3306"
         environment:
@@ -30,6 +34,8 @@ services:
     redis:
         container_name: redis
         image: redis
+        labels:
+            - traefik.enable=false
         expose:
             - "6379"
         restart: always
@@ -37,8 +43,13 @@ services:
     adminer:
         container_name: adminer
         image: adminer
-        ports:
-          - "8080:8080"
+        labels:
+            - traefik.backend=adminer
+            - traefik.frontend.rule=Host:db-admin.reddevs.io
+            - traefik.docker.network=proxy
+            - traefik.port=80
+        expose:
+          - "8080"
         restart: always 
 
 
@@ -50,4 +61,4 @@ volumes:
 networks:
     reverse-proxy:
         external:
-            name: franmakoreverseproxy_reverse-proxy
+            name: proxy
